@@ -132,6 +132,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.gui.drum3_button.clicked.connect(lambda: self.play_drum("d3"))
         self.gui.drum4_button.clicked.connect(lambda: self.play_drum("d4"))
 
+        self.curr_octave = 4
+
         piano_btns = {
             self.gui.B_button, self.gui.C_button, self.gui.Csharp_button,
             self.gui.D_button, self.gui.Dsharp_sharp, self.gui.E_button,
@@ -139,7 +141,15 @@ class MainWindow(QtWidgets.QMainWindow):
             self.gui.Gsharp_button, self.gui.A_button, self.gui.Asharp_button,
             self.gui.B_button
         }
-        piano_notes = [ "C4", "C#", "D4", "D#", "E4", "F4", "F#", "G4", "G#", "A4", "A#", "B4"]
+
+        _piano_notes, piano_notes = ["C", "D", "E", "F", "G", "A", "B"], []
+        for note in _piano_notes:
+            piano_notes.append(f"{note}{self.curr_octave}")
+            piano_notes.append(f"{note}{self.curr_octave}#")
+
+        piano_notes = list(
+            set(piano_notes) - {f"B{self.curr_octave}#", f"E{self.curr_octave}#"}
+        )
 
         for i, btn in enumerate(piano_btns):
             btn.clicked.connect(self.play_piano_of(piano_notes[i]))
