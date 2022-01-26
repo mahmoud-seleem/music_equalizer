@@ -132,18 +132,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.gui.drum3_button.clicked.connect(lambda: self.play_drum("d3"))
         self.gui.drum4_button.clicked.connect(lambda: self.play_drum("d4"))
 
-        self.gui.C_button.clicked.connect(lambda: self.play_piano("C4"))
-        self.gui.Csharp_button.clicked.connect(lambda: self.play_piano("C#"))
-        self.gui.D_button.clicked.connect(lambda: self.play_piano("D4"))
-        self.gui.Dsharp_sharp.clicked.connect(lambda: self.play_piano("D#"))
-        self.gui.E_button.clicked.connect(lambda: self.play_piano("E4"))
-        self.gui.F_button.clicked.connect(lambda: self.play_piano("F4"))
-        self.gui.Fsharp_button.clicked.connect(lambda: self.play_piano("F#"))
-        self.gui.G_button.clicked.connect(lambda: self.play_piano("G4"))
-        self.gui.Gsharp_button.clicked.connect(lambda: self.play_piano("G#"))
-        self.gui.A_button.clicked.connect(lambda: self.play_piano("A4"))
-        self.gui.Asharp_button.clicked.connect(lambda: self.play_piano("A#"))
-        self.gui.B_button.clicked.connect(lambda: self.play_piano("B4"))
+        piano_btns = {
+            self.gui.B_button, self.gui.C_button, self.gui.Csharp_button,
+            self.gui.D_button, self.gui.Dsharp_sharp, self.gui.E_button,
+            self.gui.F_button, self.gui.Fsharp_button, self.gui.G_button,
+            self.gui.Gsharp_button, self.gui.A_button, self.gui.Asharp_button,
+            self.gui.B_button
+        }
+        piano_notes = [ "C4", "C#", "D4", "D#", "E4", "F4", "F#", "G4", "G#", "A4", "A#", "B4"]
+
+        for i, btn in enumerate(piano_btns):
+            btn.clicked.connect(self.play_piano_of(piano_notes[i]))
 
         self.gui.string1.clicked.connect(lambda: self.play_guitar("s1"))
         self.gui.string2.clicked.connect(lambda: self.play_guitar("s2"))
@@ -152,6 +151,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.gui.string5.clicked.connect(lambda: self.play_guitar("s5"))
         self.gui.string6.clicked.connect(lambda: self.play_guitar("s6"))
         self.show()
+
+    def play_piano_of(self, note):
+        return lambda: self.play_piano(note)
 
     def show_piano(self):
         self.gui.instruments_widget.show()
