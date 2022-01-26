@@ -124,9 +124,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.play_guitar_string.connect(self.sound.guitar)
         self.play_piano_note.connect(self.sound.piano)
         self.play_modified_sound.connect(self.sound.play_modified_sound)
-        self.gui.guitar_dial.valueChanged.connect(self.sound.guitar_multiply_freqs)
+        self.gui.guitar_dial.valueChanged.connect(
+            self.sound.guitar_multiply_freqs)
         self.play_note.connect(self.sound.piano)
-
+        self.gui.octave_slider.valueChanged.connect(
+            self.set_cuurent_played_octave)
         self.gui.drum1_button.clicked.connect(lambda: self.play_drum("C4"))
         self.gui.drum2_button.clicked.connect(lambda: self.play_drum("HI hat"))
         self.gui.drum3_button.clicked.connect(lambda: self.play_drum("d3"))
@@ -134,25 +136,18 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.curr_octave = 4
 
-        piano_btns = {
+        self.piano_btns = {
             self.gui.B_button, self.gui.C_button, self.gui.Csharp_button,
             self.gui.D_button, self.gui.Dsharp_sharp, self.gui.E_button,
             self.gui.F_button, self.gui.Fsharp_button, self.gui.G_button,
             self.gui.Gsharp_button, self.gui.A_button, self.gui.Asharp_button,
             self.gui.B_button
         }
-
-        _piano_notes, piano_notes = ["C", "D", "E", "F", "G", "A", "B"], []
-        for note in _piano_notes:
-            piano_notes.append(f"{note}{self.curr_octave}")
-            piano_notes.append(f"{note}{self.curr_octave}#")
-
-        piano_notes = list(
-            set(piano_notes) - {f"B{self.curr_octave}#", f"E{self.curr_octave}#"}
-        )
-
-        for i, btn in enumerate(piano_btns):
-            btn.clicked.connect(self.play_piano_of(piano_notes[i]))
+        self._piano_notes, self.piano_notes = [
+            "C", "D", "E", "F", "G", "A", "B"], []
+        self.adjust_piano_btns()
+        # for i, btn in enumerate(self.piano_btns):
+        #     btn.clicked.connect(self.play_piano_of(self.piano_notes[i]))
 
         self.gui.string1.clicked.connect(lambda: self.play_guitar("s1"))
         self.gui.string2.clicked.connect(lambda: self.play_guitar("s2"))
@@ -161,6 +156,25 @@ class MainWindow(QtWidgets.QMainWindow):
         self.gui.string5.clicked.connect(lambda: self.play_guitar("s5"))
         self.gui.string6.clicked.connect(lambda: self.play_guitar("s6"))
         self.show()
+
+    def adjust_piano_btns(self):
+        self.piano_notes.clear()
+        for note in self._piano_notes:
+            self.piano_notes.append(f"{note}{self.curr_octave}")
+            self.piano_notes.append(f"{note}{self.curr_octave}#")
+
+        self.piano_notes = list(
+            set(self.piano_notes) -
+            {f"B{self.curr_octave}#", f"E{self.curr_octave}#"}
+        )
+        for i, btn in enumerate(self.piano_btns):
+            btn.clicked.connect(self.play_piano_of(self.piano_notes[i]))
+            
+    def set_cuurent_played_octave(self):
+        value = self.gui.octave_slider.value()
+        self.curr_octave = int(value)
+        self.gui.label_16.setText(str(value))
+        self.adjust_piano_btns()
 
     def play_piano_of(self, note):
         return lambda: self.play_piano(note)
@@ -603,7 +617,7 @@ if __name__ == '__main__':
     #             freq)+1] = string_frequences
     #     return strings_freq
 
-    # def get_piano_notes_freq(self):
+    # def getself.self.self._piano_notes_freq(self):
     #     octave = ['C', 'c', 'D', 'd', 'E', 'F', 'f', 'G', 'g', 'A', 'a', 'B']
     #     base_freq = 261.63
 
@@ -649,7 +663,7 @@ if __name__ == '__main__':
     #                               channels=1,
     #                               rate=44100,
     #                               output=True)
-    # self.note_freqs = self.get_piano_notes_freq()
+    # self.note_freqs = self.getself.self.self._piano_notes_freq()
     # self.notes_of_piano = self.piano_notes()
     # self.pan_flute_notes = self.get_panflute_notes()
 
