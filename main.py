@@ -168,6 +168,7 @@ class MainWindow(QtWidgets.QMainWindow):
             {f"B{self.curr_octave}#", f"E{self.curr_octave}#"}
         )
         for i, btn in enumerate(self.piano_btns):
+            btn.disconnect()
             btn.clicked.connect(self.play_piano_of(self.piano_notes[i]))
             
     def set_cuurent_played_octave(self):
