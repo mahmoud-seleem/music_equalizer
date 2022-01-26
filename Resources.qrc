@@ -1,0 +1,36 @@
+<RCC>
+  <qresource prefix="images">
+    <file>instroments_icons/guitar.png</file>
+    <file>images/floor.png</file>
+    <file>images/drums_stand2.png</file>
+    <file>images/drum1.png</file>
+    <file>images/drum3.png</file>
+    <file>images/drum4.png</file>
+    <file>images/drums_stand.png</file>
+    <file>images/druum2.png</file>
+    <file>images/guitar.png</file>
+    <file>images/guitar.jpg</file>
+    <file>images/giphy.gif</file>
+  </qresource>
+  <qresource prefix="instroments_icons">
+    <file>instroments_icons/contrabasson.png</file>
+    <file>instroments_icons/contrabasson2.jpg</file>
+    <file>instroments_icons/drums.png</file>
+    <file>instroments_icons/flute.png</file>
+    <file>instroments_icons/guitar.png</file>
+    <file>instroments_icons/oboe.png</file>
+    <file>instroments_icons/piano.png</file>
+    <file>instroments_icons/pipeorgan.png</file>
+    <file>instroments_icons/snare.png</file>
+    <file>instroments_icons/xylophone.png</file>
+    <file>instroments_icons/تنزيل (3).png</file>
+    <file>instroments_icons/flute.png</file>
+    <file>instroments_icons/guitar.png</file>
+    <file>instroments_icons/oboe.png</file>
+    <file>instroments_icons/piano.png</file>
+    <file>instroments_icons/pipeorgan.png</file>
+    <file>instroments_icons/snare.png</file>
+    <file>instroments_icons/xylophone.png</file>
+    <file>instroments_icons/تنزيل (3).png</file>
+  </qresource>
+</RCC>
