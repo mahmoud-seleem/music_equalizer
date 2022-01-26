@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'GUI.ui'
+# Form implementation generated from reading ui file './GUI.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1036, 595)
+        MainWindow.resize(1302, 595)
         MainWindow.setFocusPolicy(QtCore.Qt.ClickFocus)
         MainWindow.setTabShape(QtWidgets.QTabWidget.Rounded)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -67,7 +67,7 @@ class Ui_MainWindow(object):
         self.play_pause_botton = QtWidgets.QPushButton(self.main_graph_widget)
         self.play_pause_botton.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("icons/play.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("./icons/play.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.play_pause_botton.setIcon(icon)
         self.play_pause_botton.setIconSize(QtCore.QSize(47, 35))
         self.play_pause_botton.setCheckable(False)
@@ -96,7 +96,7 @@ class Ui_MainWindow(object):
         self.volume_image_label.setMaximumSize(QtCore.QSize(60, 35))
         self.volume_image_label.setBaseSize(QtCore.QSize(0, 0))
         self.volume_image_label.setText("")
-        self.volume_image_label.setPixmap(QtGui.QPixmap("icons/2.png"))
+        self.volume_image_label.setPixmap(QtGui.QPixmap("./icons/2.png"))
         self.volume_image_label.setScaledContents(True)
         self.volume_image_label.setWordWrap(False)
         self.volume_image_label.setObjectName("volume_image_label")
@@ -292,7 +292,7 @@ class Ui_MainWindow(object):
         self.label_3 = QtWidgets.QLabel(self.Equalizer_widger)
         self.label_3.setMaximumSize(QtCore.QSize(150, 200))
         self.label_3.setText("")
-        self.label_3.setPixmap(QtGui.QPixmap("instroments_icons/contrabasson2.jpg"))
+        self.label_3.setPixmap(QtGui.QPixmap("./instroments_icons/contrabasson2.jpg"))
         self.label_3.setScaledContents(True)
         self.label_3.setAlignment(QtCore.Qt.AlignCenter)
         self.label_3.setObjectName("label_3")
@@ -700,6 +700,12 @@ class Ui_MainWindow(object):
         self.string1.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.string1.setText("")
         self.string1.setObjectName("string1")
+        self.guitar_dial = QtWidgets.QDial(self.guitar_container_widget)
+        self.guitar_dial.setGeometry(QtCore.QRect(790, 250, 31, 41))
+        self.guitar_dial.setMinimum(1)
+        self.guitar_dial.setMaximum(5)
+        self.guitar_dial.setProperty("value", 3)
+        self.guitar_dial.setObjectName("guitar_dial")
         self.horizontalLayout_3.addWidget(self.guitar_container_widget)
         spacerItem16 = QtWidgets.QSpacerItem(33, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem16)
@@ -815,7 +821,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_25.addWidget(self.tabWidget)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1036, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1302, 20))
         self.menubar.setObjectName("menubar")
         self.file_menu = QtWidgets.QMenu(self.menubar)
         self.file_menu.setObjectName("file_menu")
@@ -829,7 +835,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.file_menu.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -877,13 +883,3 @@ class Ui_MainWindow(object):
         self.open_action.setText(_translate("MainWindow", "open"))
 from pyqtgraph import PlotWidget
 import Resources
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
