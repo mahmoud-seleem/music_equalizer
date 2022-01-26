@@ -13,9 +13,9 @@ class sound(QtCore.QObject):
                                     rate=44100,
                                     output=True)
         self.notes = ''
-        self.dictionary_of_drums = self.generate_drums_sounds()
-        self.dictionary_of_piano = self.generate_piano_sounds()
-        self.dictionary_of_strings = self.generate_guitar_sounds()
+        # self.dictionary_of_drums = self.generate_drums_sounds()
+        # self.dictionary_of_piano = self.generate_piano_sounds()
+        # self.dictionary_of_strings = self.generate_guitar_sounds()
 
     @QtCore.pyqtSlot(str)
     def play_drum(self, key):
@@ -41,40 +41,40 @@ class sound(QtCore.QObject):
         streamNote = stream.Stream(output_notes)
         midi.realtime.StreamPlayer(streamNote).play(playForMilliseconds=50, blocked=False)
         
-    @QtCore.pyqtSlot(str)
-    def guitar(self,notes):    
-        x = instrument.Guitar()
-        keyNote = note.Note(notes)
-        keyNote.duration.quarterLength = 1
-        keyNote.volume.velocity = 127 
-        output_notes=[]
-        output_notes.append(x)
-        output_notes.append(keyNote)
-        streamNote = stream.Stream(output_notes)
-        midi.realtime.StreamPlayer(streamNote).play(playForMilliseconds=50, blocked=False)
-    @QtCore.pyqtSlot(str)   
-    def cymbals(self,notes):    
-        x = instrument.Cymbals()
-        keyNote = note.Note(notes)
-        keyNote.duration.quarterLength = 1
-        keyNote.volume.velocity = 127 
-        output_notes=[]
-        output_notes.append(x)
-        output_notes.append(keyNote)
-        streamNote = stream.Stream(output_notes)
-        midi.realtime.StreamPlayer(streamNote).play(playForMilliseconds=50, blocked=False)
+    # @QtCore.pyqtSlot(str)
+    # def guitar(self,notes):    
+    #     x = instrument.Guitar()
+    #     keyNote = note.Note(notes)
+    #     keyNote.duration.quarterLength = 1
+    #     keyNote.volume.velocity = 127 
+    #     output_notes=[]
+    #     output_notes.append(x)
+    #     output_notes.append(keyNote)
+    #     streamNote = stream.Stream(output_notes)
+    #     midi.realtime.StreamPlayer(streamNote).play(playForMilliseconds=50, blocked=False)
+    # @QtCore.pyqtSlot(str)   
+    # def cymbals(self,notes):    
+    #     x = instrument.Cymbals()
+    #     keyNote = note.Note(notes)
+    #     keyNote.duration.quarterLength = 1
+    #     keyNote.volume.velocity = 127 
+    #     output_notes=[]
+    #     output_notes.append(x)
+    #     output_notes.append(keyNote)
+    #     streamNote = stream.Stream(output_notes)
+    #     midi.realtime.StreamPlayer(streamNote).play(playForMilliseconds=50, blocked=False)
     
-    @QtCore.pyqtSlot(str)  
-    def Bongo(self):
-            x = instrument.BongoDrums()
-            keyNote = chord.Chord([5.5])
-            keyNote.duration.quarterLength = 1
-            keyNote.volume.velocity = 127
-            output_notes = []
-            output_notes.append(x)
-            output_notes.append(keyNote)
-            streamNote = stream.Stream(output_notes)
-            midi.realtime.StreamPlayer(streamNote).play(playForMilliseconds=50, blocked=False)
+    # @QtCore.pyqtSlot(str)  
+    # def Bongo(self):
+    #         x = instrument.BongoDrums()
+    #         keyNote = chord.Chord([5.5])
+    #         keyNote.duration.quarterLength = 1
+    #         keyNote.volume.velocity = 127
+    #         output_notes = []
+    #         output_notes.append(x)
+    #         output_notes.append(keyNote)
+    #         streamNote = stream.Stream(output_notes)
+    #         midi.realtime.StreamPlayer(streamNote).play(playForMilliseconds=50, blocked=False)
             
     def generate_piano_sounds(self):
         dictionary_of_piano = {}
