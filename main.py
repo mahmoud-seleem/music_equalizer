@@ -129,8 +129,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.play_note.connect(self.sound.piano)
         self.gui.octave_slider.valueChanged.connect(
             self.set_cuurent_played_octave)
-        self.gui.drum1_button.clicked.connect(lambda: self.play_drum("C4"))
-        self.gui.drum2_button.clicked.connect(lambda: self.play_drum("HI hat"))
+        self.gui.drum1_button.clicked.connect(lambda: self.play_drum("C"))
+        self.gui.drum2_button.clicked.connect(lambda: self.play_drum("C#"))
         self.gui.drum3_button.clicked.connect(lambda: self.play_drum("d3"))
         self.gui.drum4_button.clicked.connect(lambda: self.play_drum("d4"))
 

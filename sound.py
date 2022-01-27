@@ -105,13 +105,14 @@ class sound(QtCore.QObject):
     def cymbals(self, notes):
         x = instrument.Cymbals()
         keyNote = note.Note(notes)
+        keyNote.beatDur
         keyNote.duration.quarterLength = 1
         keyNote.volume.velocity = 127
         output_notes=[]
         output_notes.append(x)
         output_notes.append(keyNote)
         streamNote = stream.Stream(output_notes)
-        midi.realtime.StreamPlayer(streamNote).play(playForMilliseconds=50, blocked=False)
+        midi.realtime.StreamPlayer(streamNote).play(playForMilliseconds=200, blocked=False)
 
     @QtCore.pyqtSlot(np.ndarray)
     def play_modified_sound(self,sound):
