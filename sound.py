@@ -27,7 +27,18 @@ class sound(QtCore.QObject):
         print(streamNote)
         print(type(streamNote))
         midi.realtime.StreamPlayer(streamNote).play(playForMilliseconds=50, blocked=False)
-        
+    
+    @QtCore.pyqtSlot(int)
+    def Bongo(self,value):
+            x = instrument.BongoDrums()
+            keyNote = chord.Chord([value])
+            keyNote.duration.quarterLength = 1
+            keyNote.volume.velocity = 140
+            output_notes = []
+            output_notes.append(x)
+            output_notes.append(keyNote)
+            streamNote = stream.Stream(output_notes)
+            midi.realtime.StreamPlayer(streamNote).play(playForMilliseconds=50, blocked=False)
     # @QtCore.pyqtSlot(str)
     # def guitar(self,notes):    
     #     x = instrument.Guitar()
@@ -101,18 +112,18 @@ class sound(QtCore.QObject):
         print(factor)
         self.guitar_instrument.multiply_freqs(factor)
 
-    @QtCore.pyqtSlot(str)
-    def cymbals(self, notes):
-        x = instrument.Cymbals()
-        keyNote = note.Note(notes)
-        keyNote.beatDur
-        keyNote.duration.quarterLength = 1
-        keyNote.volume.velocity = 127
-        output_notes=[]
-        output_notes.append(x)
-        output_notes.append(keyNote)
-        streamNote = stream.Stream(output_notes)
-        midi.realtime.StreamPlayer(streamNote).play(playForMilliseconds=200, blocked=False)
+    # @QtCore.pyqtSlot(str)
+    # def cymbals(self, notes):
+    #     x = instrument.Cymbals()
+    #     keyNote = note.Note(notes)
+    #     keyNote.beatDur
+    #     keyNote.duration.quarterLength = 1
+    #     keyNote.volume.velocity = 127
+    #     output_notes=[]
+    #     output_notes.append(x)
+    #     output_notes.append(keyNote)
+    #     streamNote = stream.Stream(output_notes)
+    #     midi.realtime.StreamPlayer(streamNote).play(playForMilliseconds=200, blocked=False)
 
     @QtCore.pyqtSlot(np.ndarray)
     def play_modified_sound(self,sound):

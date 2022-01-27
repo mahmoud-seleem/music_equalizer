@@ -11,7 +11,6 @@ from scipy import signal
 import os
 import scipy.io.wavfile
 # import librosa.display
-import img_rc
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent, QMediaPlaylist
 from PyQt5.QtCore import Qt, QUrl
 import logging

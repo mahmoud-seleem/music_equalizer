@@ -30,7 +30,7 @@ matplotlib.use('Qt5Agg')
 
 class MainWindow(QtWidgets.QMainWindow):
     play_piano_note = pyqtSignal(str)
-    play_drum_number = pyqtSignal(str)
+    play_drums = pyqtSignal(int)
     play_guitar_string = pyqtSignal(str)
     play_modified_sound = pyqtSignal(np.ndarray)
     play_note = pyqtSignal(str)
@@ -120,7 +120,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.sound_thread = QThread()
         self.sound.moveToThread(self.sound_thread)
         self.sound_thread.start()
-        self.play_drum_number.connect(self.sound.cymbals)
+        self.play_drums.connect(self.sound.Bongo)
         self.play_guitar_string.connect(self.sound.guitar)
         self.play_piano_note.connect(self.sound.piano)
         self.play_modified_sound.connect(self.sound.play_modified_sound)
@@ -129,13 +129,16 @@ class MainWindow(QtWidgets.QMainWindow):
         self.play_note.connect(self.sound.piano)
         self.gui.octave_slider.valueChanged.connect(
             self.set_cuurent_played_octave)
-        self.gui.drum1_button.clicked.connect(lambda: self.play_drum("C"))
-        self.gui.drum2_button.clicked.connect(lambda: self.play_drum("C#"))
-        self.gui.drum3_button.clicked.connect(lambda: self.play_drum("d3"))
-        self.gui.drum4_button.clicked.connect(lambda: self.play_drum("d4"))
+        # self.gui.drum1_button.clicked.connect(lambda: self.play_drum("C"))
+        # self.gui.drum2_button.clicked.connect(lambda: self.play_drum("C#"))
+        # self.gui.drum3_button.clicked.connect(lambda: self.play_drum("d3"))
+        # self.gui.drum4_button.clicked.connect(lambda: self.play_drum("d4"))
+        self.gui.drums_button.clicked.connect(self.play_drum)
+        self.gui.drums_slider.valueChanged.connect(self.adjust_drums_power)
 
         self.curr_octave = 4
-
+        self.drumms_power = 5
+        self.drums_power_ramges = [2,2.5,3,3.5,4,4.2,4.4,4.6,4.8,5,5.2,5.4,5.6,5.8,6,6.5,7,7.5,8,9]
         self.piano_btns = {
             self.gui.B_button, self.gui.C_button, self.gui.Csharp_button,
             self.gui.D_button, self.gui.Dsharp_sharp, self.gui.E_button,
@@ -157,6 +160,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.gui.string6.clicked.connect(lambda: self.play_guitar("s6"))
         self.show()
 
+    def play_drum(self):
+        self.play_drums.emit(self.drumms_power)
+
+    def adjust_drums_power(self):
+        self.drumms_power = self.drums_power_ramges[self.gui.drums_slider.value()]
+
     def adjust_piano_btns(self):
         self.piano_notes.clear()
         for note in self._piano_notes:
@@ -170,7 +179,7 @@ class MainWindow(QtWidgets.QMainWindow):
         for i, btn in enumerate(self.piano_btns):
             btn.disconnect()
             btn.clicked.connect(self.play_piano_of(self.piano_notes[i]))
-            
+
     def set_cuurent_played_octave(self):
         value = self.gui.octave_slider.value()
         self.curr_octave = int(value)
@@ -189,8 +198,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def play_piano(self, key):
         self.play_note.emit(key)
 
-    def play_drum(self, key):
-        self.play_drum_number.emit(key)
+    # def play_drum(self, key):
+    #     self.play_drum_number.emit(key)
 
     def play_guitar(self, key):
         self.play_guitar_string.emit(key)
